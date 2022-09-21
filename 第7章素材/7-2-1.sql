@@ -1,15 +1,15 @@
---´´½¨Ö°Ô±±í
+--åˆ›å»ºèŒå‘˜è¡¨
 
 drop table if exists hr_employee cascade;
 create table hr_employee(
-    empid              	int                  	not null,  --Ö°Ô±¹¤ºÅ
-    empname        		text                	not null,  --Ö°Ô±ĞÕÃû
-    deptid              int                 	not null,  --²¿ÃÅID
-    sex                 int                		not null,  --0£ºÄĞ 1£ºÅ®
-    cardno            	text                	not null,  --Éí·İÖ¤ºÅ
-    telephone       	text[]                 	not null,  --ÁªÏµµç»°ÁĞ±í
-    birthdate        	date                	not null,  --³öÉúÈÕÆÚ
-    createtime     		timestamp       		not null  --ÈëÖ°Ê±¼ä
+    empid              	int                  	not null,  --èŒå‘˜å·¥å·
+    empname        		text                	not null,  --èŒå‘˜å§“å
+    deptid              int                 	not null,  --éƒ¨é—¨ID
+    sex                 int                		not null,  --0ï¼šç”· 1ï¼šå¥³
+    cardno            	text                	not null,  --èº«ä»½è¯å·
+    telephone       	text[]                 	not null,  --è”ç³»ç”µè¯åˆ—è¡¨
+    birthdate        	date                	not null,  --å‡ºç”Ÿæ—¥æœŸ
+    createtime     		timestamp       		not null  --å…¥èŒæ—¶é—´
 	
 );
 

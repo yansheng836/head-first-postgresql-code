@@ -1,189 +1,189 @@
 
---1.´´½¨Êı¾İ¿â
+--1.åˆ›å»ºæ•°æ®åº“
 CREATE TABLESPACE  hr_data location '/pgdata/hrdata';
 drop database if exists hr;
 create database hr with tablespace=hr_data encoding=utf8;
 
---2.´´½¨ÓÃ»§
+--2.åˆ›å»ºç”¨æˆ·
 create user hr password 'hr123';
 grant all privileges on database hr to hr;
 create schema hr authorization hr;
 
---3.´´½¨ÀàĞÍ
---ÑªĞÍ0:A 1:B 2:AB 3:O //½¨ÒéÊ¹ÓÃÃ¶¾ÙÀàĞÍ
+--3.åˆ›å»ºç±»å‹
+--è¡€å‹0:A 1:B 2:AB 3:O //å»ºè®®ä½¿ç”¨æšä¸¾ç±»å‹
 drop type blood cascade;
 create type blood as enum('A','B','AB','O','OTHER');
---ĞÔ±ğ--0£ºÄĞ 1£ºÅ®
+--æ€§åˆ«--0ï¼šç”· 1ï¼šå¥³
 drop type sex cascade;
 create type sex as enum('male','female');
---¸ú¶©¹ºÈË¹ØÏµ:0:×Ô¼º 1:ÅäÅ¼ 2:¸¸Ä¸ 3:×ÓÅ®
+--è·Ÿè®¢è´­äººå…³ç³»:0:è‡ªå·± 1:é…å¶ 2:çˆ¶æ¯ 3:å­å¥³
 drop type relationship cascade;
 create type relationship as enum('me', 'mate','parent','children');
 
---4.´´½¨±í²¢²åÈëÊı¾İ
+--4.åˆ›å»ºè¡¨å¹¶æ’å…¥æ•°æ®
 --==============================================================
---          table: department   ²¿ÃÅ±í
+--          table: department   éƒ¨é—¨è¡¨
 --==============================================================
 \echo department;
 drop table if exists department cascade;
 create table department(
-    deptid              int                  not null,  ---²¿ÃÅID
-    deptname            text                 not null,  ---²¿ÃÅÃû³Æ
-    parentid            int                  not null,  --ÉÏ¼¶²¿ÃÅID
-    createtime          timestamp            null,        --²¿ÃÅ´´½¨Ê±¼ä
+    deptid              int                  not null,  ---éƒ¨é—¨ID
+    deptname            text                 not null,  ---éƒ¨é—¨åç§°
+    parentid            int                  not null,  --ä¸Šçº§éƒ¨é—¨ID
+    createtime          timestamp            null,        --éƒ¨é—¨åˆ›å»ºæ—¶é—´
     constraint pk_department primary key (deptid)
 );
 
 insert into department values
 (0,'ETZ', -1),
-(1001,'Éú²ú²¿', 0),
-(1002,'Éú²úÒ»²¿', 1001),
-(1003,'Éú²ú¶ş²¿', 1001),
-(1004,'ÏúÊÛ²¿', 0),
-(1005,'ÏúÊÛÒ»²¿', 1004),
-(1006,'ÏúÊÛ¶ş²¿', 1004),
-(1007,'ÈËÁ¦×ÊÔ´²¿', 0),
-(1008,'»á¼Æ²¿', 1007),
-(1009,'Ğû´«²¿', 1007),
-(1010,'·¨Îñ²¿', 0);
+(1001,'ç”Ÿäº§éƒ¨', 0),
+(1002,'ç”Ÿäº§ä¸€éƒ¨', 1001),
+(1003,'ç”Ÿäº§äºŒéƒ¨', 1001),
+(1004,'é”€å”®éƒ¨', 0),
+(1005,'é”€å”®ä¸€éƒ¨', 1004),
+(1006,'é”€å”®äºŒéƒ¨', 1004),
+(1007,'äººåŠ›èµ„æºéƒ¨', 0),
+(1008,'ä¼šè®¡éƒ¨', 1007),
+(1009,'å®£ä¼ éƒ¨', 1007),
+(1010,'æ³•åŠ¡éƒ¨', 0);
 
 --==============================================================
---          table: employee   Ö°Ô±±í
+--          table: employee   èŒå‘˜è¡¨
 --==============================================================
 \echo employee;
 drop table if exists employee cascade;
 create table employee(
-    empid              int                 not null,  --Ö°Ô±¹¤ºÅ
-    empname            text                not null,  --Ö°Ô±ĞÕÃû
-    deptid             int                 not null,  --²¿ÃÅID
-    sex                sex                 not null,  --0£ºÄĞ 1£ºÅ®
-    cardno             text                not null,  --Éí·İÖ¤ºÅ
-    telephone          text                not null,  --ÁªÏµµç»°
-    birthdate          date                not null,  --³öÉúÈÕÆÚ
-    salary             int                 not null,  --¹¤×Ê
-    createtime     timestamp               not null,  --ÈëÖ°Ê±¼ä
+    empid              int                 not null,  --èŒå‘˜å·¥å·
+    empname            text                not null,  --èŒå‘˜å§“å
+    deptid             int                 not null,  --éƒ¨é—¨ID
+    sex                sex                 not null,  --0ï¼šç”· 1ï¼šå¥³
+    cardno             text                not null,  --èº«ä»½è¯å·
+    telephone          text                not null,  --è”ç³»ç”µè¯
+    birthdate          date                not null,  --å‡ºç”Ÿæ—¥æœŸ
+    salary             int                 not null,  --å·¥èµ„
+    createtime     timestamp               not null,  --å…¥èŒæ—¶é—´
     constraint pk_employee primary key (empid)
 );
 
 insert into employee values
-(100001, 'ÕÔ×ÓÁú', 1002, 'male', '452123198510084651', '138515600001',to_date('19750101','YYYYMMDD'),100000, to_date('20000101','YYYYMMDD')),
-(100002, 'Íõ×Ó', 1002, 'male', '452123198510084652', '138515600002',to_date('19760101','YYYYMMDD'),80000, to_date('20010101','YYYYMMDD')),
-(100003, 'ÍõÁÕ', 1002, 'female', '452123198510084653', '138515600003',to_date('19770101','YYYYMMDD'),70000, to_date('20020101','YYYYMMDD')),
-(100004, '¶¡Ò»', 1002, 'male', '452123198510084654', '138515600004',to_date('19780101','YYYYMMDD'),80000, to_date('20030101','YYYYMMDD')),
-(100005, 'Ç®²©', 1003, 'male', '452123198510084655', '138515600005',to_date('19790101','YYYYMMDD'),60000, to_date('20040101','YYYYMMDD')),
-(100006, 'ËïÈı', 1005, 'male', '452123198510084656', '138515600006',to_date('19800101','YYYYMMDD'),50000, to_date('20050101','YYYYMMDD')),
-(100007, 'ÀîËÄ', 1006, 'male', '452123198510084657', '138515600007',to_date('19810101','YYYYMMDD'),40000, to_date('20060101','YYYYMMDD')),
-(100008, 'ÖÜÈ«', 1008, 'male', '452123198510084658', '138515600008',to_date('19820101','YYYYMMDD'),30000, to_date('20070101','YYYYMMDD')),
-(100009, 'Îâ¸Õ', 1009, 'male', '452123198510084659', '138515600009',to_date('19830101','YYYYMMDD'),25000, to_date('20080101','YYYYMMDD')),
-(100010, '·ëÓĞ²Å', 1009, 'male', '452123198510084660', '138515600010',to_date('19840101','YYYYMMDD'),20000, to_date('20090101','YYYYMMDD')),
-(100011, '³Â³¿', 1009, 'female', '452123198510084661', '138515600011',to_date('19850101','YYYYMMDD'),19000, to_date('20100101','YYYYMMDD')),
-(100012, 'ÎÀÇà', 1009, 'male', '452123198510084662', '138515600012',to_date('19860101','YYYYMMDD'),18000, to_date('20110101','YYYYMMDD')),
-(100013, 'Ãç´ä»¨', 1009, 'female', '452123198510084663', '138515600013',to_date('19870101','YYYYMMDD'),17000, to_date('20120101','YYYYMMDD')),
-(100014, 'ÍõÏşÃ÷', 1009, 'female', '452123198510084663', '138515600014',to_date('19870801','YYYYMMDD'),17000, to_date('20120101','YYYYMMDD')),
-(100015, '²Ü²Ù', 1009, 'male', '452123198510084664', '138515600015',to_date('19880101','YYYYMMDD'),16000, to_date('20130101','YYYYMMDD'));
+(100001, 'èµµå­é¾™', 1002, 'male', '452123198510084651', '138515600001',to_date('19750101','YYYYMMDD'),100000, to_date('20000101','YYYYMMDD')),
+(100002, 'ç‹å­', 1002, 'male', '452123198510084652', '138515600002',to_date('19760101','YYYYMMDD'),80000, to_date('20010101','YYYYMMDD')),
+(100003, 'ç‹ç³', 1002, 'female', '452123198510084653', '138515600003',to_date('19770101','YYYYMMDD'),70000, to_date('20020101','YYYYMMDD')),
+(100004, 'ä¸ä¸€', 1002, 'male', '452123198510084654', '138515600004',to_date('19780101','YYYYMMDD'),80000, to_date('20030101','YYYYMMDD')),
+(100005, 'é’±åš', 1003, 'male', '452123198510084655', '138515600005',to_date('19790101','YYYYMMDD'),60000, to_date('20040101','YYYYMMDD')),
+(100006, 'å­™ä¸‰', 1005, 'male', '452123198510084656', '138515600006',to_date('19800101','YYYYMMDD'),50000, to_date('20050101','YYYYMMDD')),
+(100007, 'æå››', 1006, 'male', '452123198510084657', '138515600007',to_date('19810101','YYYYMMDD'),40000, to_date('20060101','YYYYMMDD')),
+(100008, 'å‘¨å…¨', 1008, 'male', '452123198510084658', '138515600008',to_date('19820101','YYYYMMDD'),30000, to_date('20070101','YYYYMMDD')),
+(100009, 'å´åˆš', 1009, 'male', '452123198510084659', '138515600009',to_date('19830101','YYYYMMDD'),25000, to_date('20080101','YYYYMMDD')),
+(100010, 'å†¯æœ‰æ‰', 1009, 'male', '452123198510084660', '138515600010',to_date('19840101','YYYYMMDD'),20000, to_date('20090101','YYYYMMDD')),
+(100011, 'é™ˆæ™¨', 1009, 'female', '452123198510084661', '138515600011',to_date('19850101','YYYYMMDD'),19000, to_date('20100101','YYYYMMDD')),
+(100012, 'å«é’', 1009, 'male', '452123198510084662', '138515600012',to_date('19860101','YYYYMMDD'),18000, to_date('20110101','YYYYMMDD')),
+(100013, 'è‹—ç¿ èŠ±', 1009, 'female', '452123198510084663', '138515600013',to_date('19870101','YYYYMMDD'),17000, to_date('20120101','YYYYMMDD')),
+(100014, 'ç‹æ™“æ˜', 1009, 'female', '452123198510084663', '138515600014',to_date('19870801','YYYYMMDD'),17000, to_date('20120101','YYYYMMDD')),
+(100015, 'æ›¹æ“', 1009, 'male', '452123198510084664', '138515600015',to_date('19880101','YYYYMMDD'),16000, to_date('20130101','YYYYMMDD'));
 
 --==============================================================
---          table: employee_ext   Ö°Ô±À©Õ¹ĞÅÏ¢±í
+--          table: employee_ext   èŒå‘˜æ‰©å±•ä¿¡æ¯è¡¨
 --==============================================================
 \echo employee_ext;
 drop table if exists employee_ext cascade;
 create table employee_ext(
-    empid                     int                 not null,  --Ö°Ô±ID
-    empname_en                text                 null,      --Ó¢ÎÄÃû
-    height                    int                 null,      --Éí¸ß
-    bloodtype                 blood               null,     --ÑªĞÍ0:A 1:B 2:AB 3:O
-    address                   text                null,      --¼ÒÍ¥×¡Ö·
-    emername                  text                null,     --½ô¼±ÁªÏµÈË
-    emerntelephone            text                null,     --½ô¼±ÁªÏµµç»°
-    pics                      text[]              null,   --Êı×é´æ·ÅÈıÖÖÍ¼Æ¬Â·¾¶(ËõÂÔÍ¼,ÆÕÍ¨Í¼£¬¸ßÇåÍ¼)
+    empid                     int                 not null,  --èŒå‘˜ID
+    empname_en                text                 null,      --è‹±æ–‡å
+    height                    int                 null,      --èº«é«˜
+    bloodtype                 blood               null,     --è¡€å‹0:A 1:B 2:AB 3:O
+    address                   text                null,      --å®¶åº­ä½å€
+    emername                  text                null,     --ç´§æ€¥è”ç³»äºº
+    emerntelephone            text                null,     --ç´§æ€¥è”ç³»ç”µè¯
+    pics                      text[]              null,   --æ•°ç»„å­˜æ”¾ä¸‰ç§å›¾ç‰‡è·¯å¾„(ç¼©ç•¥å›¾,æ™®é€šå›¾ï¼Œé«˜æ¸…å›¾)
     constraint pk_employee_ext primary key (empid)
 );
 insert into employee_ext values
-(100001, 'zhaozilong', 177, 'A', 'ÄÏ¾©', null,''),
-(100002, 'wangzi', 175, 'O', 'ËÕÖİ', null, ''),
-(100003, 'wanglin', 162, 'AB', 'ºÓÄÏ', null, ''),
-(100004, 'dingyi', 188, 'A', 'ÄÏÍ¨', null, ''),
-(100005, 'qianbo', 169, 'O', 'ºÓ±±', null, ''),
-(100006, 'sunsan', 176, 'B', 'ºşÄÏ', null, ''),
-(100007, 'lisi', 173, 'O', 'ºş±±', null, ''),
-(100008, 'zhouquan', 174, 'AB', '¹ã¶«', null, ''),
-(100009, 'wugang', 179, 'A', 'ÑïÖİ', null, ''),
-(100010, 'fenyoucai', 172, 'A', '¹ãÎ÷', '15050100010', ''),
-(100011, 'chencheng', 168, 'B', '¹óÖİ', '15050100011', ''),
-(100012, 'weiqing', 180, 'B', 'ÄÏ¾©', '15050100012', ''),
-(100013, 'miaocuihua', 171, 'A', '°²»Õ', '15050100013', ''),
-(100014, 'wangxiaoming', 165, 'A', '³É¶¼', '15050100014', ''),
-(100015, 'cc', 166, 'B', 'ÄÏÍ¨', '15050100015', '');
+(100001, 'zhaozilong', 177, 'A', 'å—äº¬', null,''),
+(100002, 'wangzi', 175, 'O', 'è‹å·', null, ''),
+(100003, 'wanglin', 162, 'AB', 'æ²³å—', null, ''),
+(100004, 'dingyi', 188, 'A', 'å—é€š', null, ''),
+(100005, 'qianbo', 169, 'O', 'æ²³åŒ—', null, ''),
+(100006, 'sunsan', 176, 'B', 'æ¹–å—', null, ''),
+(100007, 'lisi', 173, 'O', 'æ¹–åŒ—', null, ''),
+(100008, 'zhouquan', 174, 'AB', 'å¹¿ä¸œ', null, ''),
+(100009, 'wugang', 179, 'A', 'æ‰¬å·', null, ''),
+(100010, 'fenyoucai', 172, 'A', 'å¹¿è¥¿', '15050100010', ''),
+(100011, 'chencheng', 168, 'B', 'è´µå·', '15050100011', ''),
+(100012, 'weiqing', 180, 'B', 'å—äº¬', '15050100012', ''),
+(100013, 'miaocuihua', 171, 'A', 'å®‰å¾½', '15050100013', ''),
+(100014, 'wangxiaoming', 165, 'A', 'æˆéƒ½', '15050100014', ''),
+(100015, 'cc', 166, 'B', 'å—é€š', '15050100015', '');
 
 --==============================================================
---          table: insurance   Ö°Ô±±£ÏÕ
+--          table: insurance   èŒå‘˜ä¿é™©
 --==============================================================
 \echo insurance;
 drop table if exists insurance cascade;
 create table insurance(
-    insuranceid          int                    not null,  --±£ÏÕID
-    insurancename        text                   not null,  --±£ÏÕÃû³Æ
-    companyname          text                   not null,  --±£ÏÕ¹«Ë¾
-    orderlimit           int                    not null,  --ÏŞÖÆ¶©¹º·İÊı
-    duration             daterange              not null,  --±£ÏÕÓĞĞ§ÆÚ ÉúĞ§ÈÕÆÚ-Ê§Ğ§ÈÕÆÚ
+    insuranceid          int                    not null,  --ä¿é™©ID
+    insurancename        text                   not null,  --ä¿é™©åç§°
+    companyname          text                   not null,  --ä¿é™©å…¬å¸
+    orderlimit           int                    not null,  --é™åˆ¶è®¢è´­ä»½æ•°
+    duration             daterange              not null,  --ä¿é™©æœ‰æ•ˆæœŸ ç”Ÿæ•ˆæ—¥æœŸ-å¤±æ•ˆæ—¥æœŸ
     constraint pk_insurance primary key (insuranceid)
 );
-insert into insurance values(1001, 'ÖØ¼²ÏÕ', 'TEZ', 10, '[2019-01-01,2019-12-31]');
-insert into insurance values(1002, '¶ùÍ¯ÏÕ', 'TEZ', 1, '[2019-01-01,2019-12-31]');
-insert into insurance values(1003, '½¡¿µÏÕ', 'TEZ', 5, '[2019-01-01,2019-12-31]');
+insert into insurance values(1001, 'é‡ç–¾é™©', 'TEZ', 10, '[2019-01-01,2019-12-31]');
+insert into insurance values(1002, 'å„¿ç«¥é™©', 'TEZ', 1, '[2019-01-01,2019-12-31]');
+insert into insurance values(1003, 'å¥åº·é™©', 'TEZ', 5, '[2019-01-01,2019-12-31]');
 
 
 
 --==============================================================
---          table: emp_order_insurance   Ö°Ô±±£ÏÕ¶©¹ºÇé¿ö
+--          table: emp_order_insurance   èŒå‘˜ä¿é™©è®¢è´­æƒ…å†µ
 --==============================================================
 \echo emp_order_insurance;
 drop table if exists emp_order_insurance cascade;
 create table emp_order_insurance(
-    empid              int                         not null,  --¶©¹ºÖ°Ô±ID
-    insuranceid        int                         not null,  --±£ÏÕid
-    insurant           text                        not null,  --±»±£ÏÕÈË
-    sex                sex                         not null,  --±»±£ÏÕÈËĞÔ±ğ
-    relationship       relationship                not null,  --¸ú¶©¹ºÈË¹ØÏµ:0:±¾ÈË 1:ÅäÅ¼ 2:¸¸Ä¸ 3:×ÓÅ®
-    copies             int                         not null,  --¶àÉÙ·İ
-    insurancedate      date                        not null  -- Í¶±£ÈÕÆÚ 
+    empid              int                         not null,  --è®¢è´­èŒå‘˜ID
+    insuranceid        int                         not null,  --ä¿é™©id
+    insurant           text                        not null,  --è¢«ä¿é™©äºº
+    sex                sex                         not null,  --è¢«ä¿é™©äººæ€§åˆ«
+    relationship       relationship                not null,  --è·Ÿè®¢è´­äººå…³ç³»:0:æœ¬äºº 1:é…å¶ 2:çˆ¶æ¯ 3:å­å¥³
+    copies             int                         not null,  --å¤šå°‘ä»½
+    insurancedate      date                        not null  -- æŠ•ä¿æ—¥æœŸ 
 );
 create index idx_emp_order_insurance on emp_order_insurance(empid);
 INSERT INTO emp_order_insurance VALUES 
-(100001, 1001, 'ÕÔ×ÓÁú', 'male', 'me', 5, '2019-01-05'), 
-(100004, 1001, '¶¡Ò»', 'male', 'me', 5, '2019-01-05'),
-(100006, 1001, 'ËïÈı', 'male', 'me', 5, '2019-01-05'), 
-(100007, 1001, 'ÀîËÄ', 'male', 'me', 5, '2019-01-05'),
-(100005, 1001, 'Ç®²©', 'male', 'me', 5, '2019-01-05'),
-(100001, 1003, 'ÕÔ×ÓÁú', 'male', 'me', 1, '2019-01-05'),
-(100001, 1002, 'ÕÔ×ÓÁú', 'male', 'me', 1, '2019-01-05'), 
-(100004, 1002, '¶¡Ò»', 'male', 'me', 1, '2019-01-05'),
-(100006, 1002, 'ËïÈı', 'male', 'me', 1, '2019-01-05'),
-(100003, 1001, 'ÍõÁÕ', 'female', 'me', 5, '2019-01-05'),
-(100003, 1002, 'ÍõÁÕ', 'female', 'me', 1, '2019-01-05'),
-(100003, 1003, 'ÍõÁÕ', 'female', 'me', 1, '2019-01-05');
+(100001, 1001, 'èµµå­é¾™', 'male', 'me', 5, '2019-01-05'), 
+(100004, 1001, 'ä¸ä¸€', 'male', 'me', 5, '2019-01-05'),
+(100006, 1001, 'å­™ä¸‰', 'male', 'me', 5, '2019-01-05'), 
+(100007, 1001, 'æå››', 'male', 'me', 5, '2019-01-05'),
+(100005, 1001, 'é’±åš', 'male', 'me', 5, '2019-01-05'),
+(100001, 1003, 'èµµå­é¾™', 'male', 'me', 1, '2019-01-05'),
+(100001, 1002, 'èµµå­é¾™', 'male', 'me', 1, '2019-01-05'), 
+(100004, 1002, 'ä¸ä¸€', 'male', 'me', 1, '2019-01-05'),
+(100006, 1002, 'å­™ä¸‰', 'male', 'me', 1, '2019-01-05'),
+(100003, 1001, 'ç‹ç³', 'female', 'me', 5, '2019-01-05'),
+(100003, 1002, 'ç‹ç³', 'female', 'me', 1, '2019-01-05'),
+(100003, 1003, 'ç‹ç³', 'female', 'me', 1, '2019-01-05');
 
 --==============================================================
---          table: employee_workhis   Ö°Ô±¹¤×÷ÂÄÀú±í
+--          table: employee_workhis   èŒå‘˜å·¥ä½œå±¥å†è¡¨
 --==============================================================
 \echo employee_workhis;
 drop table if exists employee_workhis cascade;
 create table employee_workhis(
-    empid                int             not null,  --Ö°Ô±ID
-    begindate            date            not null,  --ÆğÊ¼Ê±¼ä
-    enddate              date            not null,  --½ØÖ¹Ê±¼ä
-    companyname          text            not null,  --¹«Ë¾Ãû×Ö
-    jobcontent           text            not null,  --Ö°ÔğÃèÊö
-    witness              text            not null,  --Ö¤Ã÷ÈËĞÕÃû
-    telephone            text            not null   --Ö¤Ã÷ÈËµç»°
+    empid                int             not null,  --èŒå‘˜ID
+    begindate            date            not null,  --èµ·å§‹æ—¶é—´
+    enddate              date            not null,  --æˆªæ­¢æ—¶é—´
+    companyname          text            not null,  --å…¬å¸åå­—
+    jobcontent           text            not null,  --èŒè´£æè¿°
+    witness              text            not null,  --è¯æ˜äººå§“å
+    telephone            text            not null   --è¯æ˜äººç”µè¯
 );
 create index idx_employee_workhis on employee_workhis(empid);
 
 
---´´½¨Ò»ÕÅ±íÓÃÓÚÏÂÃæµÄ¹ØÁª¸üĞÂ²Ù×÷
+--åˆ›å»ºä¸€å¼ è¡¨ç”¨äºä¸‹é¢çš„å…³è”æ›´æ–°æ“ä½œ
 CREATE TABLE upd_dept (
-    deptid             int                 not null,  --²¿ÃÅºÅ
-    deptname           text                not null,  --²¿ÃÅÃû
+    deptid             int                 not null,  --éƒ¨é—¨å·
+    deptname           text                not null,  --éƒ¨é—¨å
     constraint pk_test primary key (deptid)
 );
 INSERT INTO upd_dept VALUES(1001,'dept1'),(1002,'dept2'),(1006,'dept6');

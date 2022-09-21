@@ -1,41 +1,41 @@
-1¡¢¶¨ÒåÒ»ÕÅ³µÁ¾ĞÅÏ¢±í£¨vehicles£©£º
+1ã€å®šä¹‰ä¸€å¼ è½¦è¾†ä¿¡æ¯è¡¨ï¼ˆvehiclesï¼‰ï¼š
 CREATE TABLE vehicles(
-    name              text   PRIMARY KEY, -- ³µÁ¾Ãû×Ö
-    color             text,  -- ³µÉíÑÕÉ« 
-    weight            float, -- ³µÉíÖØÁ¿
-    area              text,  -- ²úµØ
-    manufacturerid    int    -- ÖÆÔìÉÌ±êÊ¶
+    name              text   PRIMARY KEY, -- è½¦è¾†åå­—
+    color             text,  -- è½¦èº«é¢œè‰² 
+    weight            float, -- è½¦èº«é‡é‡
+    area              text,  -- äº§åœ°
+    manufacturerid    int    -- åˆ¶é€ å•†æ ‡è¯†
 );
 
-2¡¢·Ö±ğ´´½¨×ÔĞĞ³µ±í£¨bikes£©¡¢Ğ¡½Î³µ±í£¨cars£©¡¢¿¨³µ±í£¨trucks£©£¬ËüÃÇ·Ö±ğ¶¨Òå×Ô¼º¶ÀÓĞµÄ¶îÍâ×Ö¶Î£¬²¢ÉùÃ÷´Ó³µÁ¾ĞÅÏ¢±í£¨vehicles£©¼Ì³Ğ£¬ÈçÏÂËùÊ¾£º
+2ã€åˆ†åˆ«åˆ›å»ºè‡ªè¡Œè½¦è¡¨ï¼ˆbikesï¼‰ã€å°è½¿è½¦è¡¨ï¼ˆcarsï¼‰ã€å¡è½¦è¡¨ï¼ˆtrucksï¼‰ï¼Œå®ƒä»¬åˆ†åˆ«å®šä¹‰è‡ªå·±ç‹¬æœ‰çš„é¢å¤–å­—æ®µï¼Œå¹¶å£°æ˜ä»è½¦è¾†ä¿¡æ¯è¡¨ï¼ˆvehiclesï¼‰ç»§æ‰¿ï¼Œå¦‚ä¸‹æ‰€ç¤ºï¼š
 CREATE TABLE bikes(
-    size              float NOT NULL  -- ³µ¼Ü³ß´ç,³£¼ûµÄÊÇ15¡¢17¡¢19¡¢21´ç
+    size              float NOT NULL  -- è½¦æ¶å°ºå¯¸,å¸¸è§çš„æ˜¯15ã€17ã€19ã€21å¯¸
 ) INHERITS(vehicles);
 
 CREATE TABLE cars(
-    displacement      float NOT NULL  -- ÅÅÁ¿
+    displacement      float NOT NULL  -- æ’é‡
 ) INHERITS(vehicles);
 
 CREATE TABLE trucks(
-    load              float NOT NULL  -- ×î´óÔØÖØ
+    load              float NOT NULL  -- æœ€å¤§è½½é‡
 ) INHERITS(vehicles);
 
-3¡¢²åÈëÒ»Ğ©Êı¾İ£º
+3ã€æ’å…¥ä¸€äº›æ•°æ®ï¼š
 INSERT INTO bikes VALUES
-('bike001','RED',30,'ÉÏº£',1001,17),
-('bike002','RED',35,'ÖØÇì',1002,19),
-('bike003','YELLOW',30,'ÖØÇì',1002,17),
-('bike004','WHITE',30,'ÉÏº£',1001,21);
+('bike001','RED',30,'ä¸Šæµ·',1001,17),
+('bike002','RED',35,'é‡åº†',1002,19),
+('bike003','YELLOW',30,'é‡åº†',1002,17),
+('bike004','WHITE',30,'ä¸Šæµ·',1001,21);
 
 INSERT INTO cars VALUES
-('car001','RED',630,'ÉÏº£',2001,1.5),
-('car002','Golden',635,'ÖØÇì',2002,1.6),
-('car003','YELLOW',730,'ÖØÇì',2002,2.5),
-('car003','Grey',730,'ÖØÇì',2002,2.5),
-('car003','YELLOW',630,'±±¾©',2005,1.6),
-('car004','WHITE',700,'ÉÏº£',2001,2.0);
+('car001','RED',630,'ä¸Šæµ·',2001,1.5),
+('car002','Golden',635,'é‡åº†',2002,1.6),
+('car003','YELLOW',730,'é‡åº†',2002,2.5),
+('car003','Grey',730,'é‡åº†',2002,2.5),
+('car003','YELLOW',630,'åŒ—äº¬',2005,1.6),
+('car004','WHITE',700,'ä¸Šæµ·',2001,2.0);
 
 INSERT INTO bikes VALUES
-('truck001','RED',1040,'±±¾©',1001,10),
-('truck002','RED',1055,'ÖØÇì',1002,12),
-('truck003','Grey',1500,'ÉÏº£',1001,30);
+('truck001','RED',1040,'åŒ—äº¬',1001,10),
+('truck002','RED',1055,'é‡åº†',1002,12),
+('truck003','Grey',1500,'ä¸Šæµ·',1001,30);

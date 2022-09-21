@@ -1,21 +1,21 @@
--- Table: Ö°Ô±±í  
+-- Table: èŒå‘˜è¡¨  
 DROP TABLE IF EXISTS hr_employee CASCADE;  
 CREATE TABLE hr_employee  
 (  
-    empid          int         NOT NULL,  --Ö°Ô±ID
-    empcode        text        NOT NULL,  --Ö°Ô±¹¤ºÅ
-    empname        text        NOT NULL,  --Ö°Ô±ĞÕÃû
-    deptid         int         NOT NULL,  --²¿ÃÅID
-    sex            smallint    NOT NULL,  --0£ºÄĞ 1£ºÅ®
-    cardno         text        NOT NULL,  --Éí·İÖ¤ºÅ
-    telephone      text        NOT NULL,  --ÁªÏµµç»°
-    birthdate      date        NOT NULL,  --³öÉúÈÕÆÚ
-    createtime     timestamp   NOT NULL,  --ÈëÖ°Ê±¼ä
+    empid          int         NOT NULL,  --èŒå‘˜ID
+    empcode        text        NOT NULL,  --èŒå‘˜å·¥å·
+    empname        text        NOT NULL,  --èŒå‘˜å§“å
+    deptid         int         NOT NULL,  --éƒ¨é—¨ID
+    sex            smallint    NOT NULL,  --0ï¼šç”· 1ï¼šå¥³
+    cardno         text        NOT NULL,  --èº«ä»½è¯å·
+    telephone      text        NOT NULL,  --è”ç³»ç”µè¯
+    birthdate      date        NOT NULL,  --å‡ºç”Ÿæ—¥æœŸ
+    createtime     timestamp   NOT NULL,  --å…¥èŒæ—¶é—´
     CONSTRAINT pk_hr_employee PRIMARY KEY(empid)
 );  
 
   
--- Table: Éó¼Æ±í  
+-- Table: å®¡è®¡è¡¨  
 DROP TABLE IF EXISTS hr_employee_audit CASCADE;  
 CREATE TABLE hr_employee_audit
 (  

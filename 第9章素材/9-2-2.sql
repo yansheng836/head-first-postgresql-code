@@ -1,4 +1,4 @@
---´´½¨Éó¼Æ±í
+--åˆ›å»ºå®¡è®¡è¡¨
 DROP TABLE IF EXISTS drop_audit CASCADE;  
 CREATE TABLE drop_audit
 (  

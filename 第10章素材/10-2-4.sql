@@ -1,22 +1,22 @@
-1¡¢´´½¨·ÖÇø±í
+1ã€åˆ›å»ºåˆ†åŒºè¡¨
 CREATE TABLE vehicles2(
-category          int   NOT NULL, -- ³µÁ¾Àà±ğ£¬0£ºÎ´¹éÀà£¬1£ºbikes£¬2£ºcars£¬3£ºtrucks£¬4£ºambulances£¬5£ºsprinkler£¬6£ºslag car£¬7£ºforklift£¬...
-name              text,  -- ³µÁ¾Ãû×Ö
-color             text,  -- ³µÉíÑÕÉ« 
-weight            float,  -- ³µÉíÖØÁ¿
-area              text,  -- ²úµØ
-madedate          date  NOT NULL -- ³ö³§ÈÕÆÚ	
--- ÆäËûÒµÎñ×Ö¶Î¶¨ÒåÊ¡ÂÔ...
-) PARTITION BY LIST(category); -- ²ÉÓÃÁĞ±í·ÖÇø·½Ê½£¬categoryÎª·ÖÇø¼ü
+category          int   NOT NULL, -- è½¦è¾†ç±»åˆ«ï¼Œ0ï¼šæœªå½’ç±»ï¼Œ1ï¼šbikesï¼Œ2ï¼šcarsï¼Œ3ï¼štrucksï¼Œ4ï¼šambulancesï¼Œ5ï¼šsprinklerï¼Œ6ï¼šslag carï¼Œ7ï¼šforkliftï¼Œ...
+name              text,  -- è½¦è¾†åå­—
+color             text,  -- è½¦èº«é¢œè‰² 
+weight            float,  -- è½¦èº«é‡é‡
+area              text,  -- äº§åœ°
+madedate          date  NOT NULL -- å‡ºå‚æ—¥æœŸ	
+-- å…¶ä»–ä¸šåŠ¡å­—æ®µå®šä¹‰çœç•¥...
+) PARTITION BY LIST(category); -- é‡‡ç”¨åˆ—è¡¨åˆ†åŒºæ–¹å¼ï¼Œcategoryä¸ºåˆ†åŒºé”®
 
-2¡¢ÔÚÕâĞ©Ä¿Â¼ÉÏ´´½¨²»Í¬µÄ±í¿Õ¼ä£¬µ«ĞèÒªÔ¤ÏÈÔÚÎÄ¼şÏµÍ³ÉÏ´´½¨¸¸Ä¿Â¼/pgdata£¬²¢ÔÚ¸ÃÄ¿Â¼ÏÂ´´½¨×ÓÄ¿Â¼£ºbikes_space¡¢cars_space¡¢trucks_space¡¢ambulances_space¡¢others_space£º
+2ã€åœ¨è¿™äº›ç›®å½•ä¸Šåˆ›å»ºä¸åŒçš„è¡¨ç©ºé—´ï¼Œä½†éœ€è¦é¢„å…ˆåœ¨æ–‡ä»¶ç³»ç»Ÿä¸Šåˆ›å»ºçˆ¶ç›®å½•/pgdataï¼Œå¹¶åœ¨è¯¥ç›®å½•ä¸‹åˆ›å»ºå­ç›®å½•ï¼šbikes_spaceã€cars_spaceã€trucks_spaceã€ambulances_spaceã€others_spaceï¼š
 CREATE TABLESPACE bikes_tb LOCATION '/pgdata/bikes_space';
 CREATE TABLESPACE cars_tb LOCATION '/pgdata/cars_space';
 CREATE TABLESPACE trucks_tb LOCATION '/pgdata/trucks_space';
 CREATE TABLESPACE ambulances_tb LOCATION '/pgdata/ambulances_space';
 CREATE TABLESPACE others_tb LOCATION '/pgdata/others_space';
 
-3¡¢ÔÚ²»Í¬µÄ±í¿Õ¼äÉÏÎªvehicles2Ö÷±í´´½¨·ÖÇø
+3ã€åœ¨ä¸åŒçš„è¡¨ç©ºé—´ä¸Šä¸ºvehicles2ä¸»è¡¨åˆ›å»ºåˆ†åŒº
 CREATE TABLE vehicles2_unknown
 PARTITION OF vehicles2
 FOR VALUES IN (0)
@@ -47,7 +47,7 @@ PARTITION OF vehicles2
 FOR VALUES IN (5,6,7)
 TABLESPACE others_tb;
 
-4¡¢²åÈëÒ»Åú³µÁ¾ĞÅÏ¢£º
+4ã€æ’å…¥ä¸€æ‰¹è½¦è¾†ä¿¡æ¯ï¼š
 INSERT INTO vehicles2 VALUES
 (0,'U001','RED',null,null,'2018-04-12');
 
